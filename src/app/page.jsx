@@ -10,7 +10,7 @@ export default function Home() {
 
   useEffect(() => {
     const storage = localStorage.getItem("tasks");
-    setTask(JSON.parse(storage || []));
+    setTask(JSON.parse(storage) || []);
   }, []);
 
   useEffect(() => {
