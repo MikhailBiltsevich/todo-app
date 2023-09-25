@@ -1,21 +1,21 @@
 "use client";
-import {
-  Box,
-  Button,
-  Container,
-  Input,
-  List,
-  ListItem,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { Box, Button, Container, Input, Stack, Text } from "@chakra-ui/react";
+import { useEffect, useRef, useState } from "react";
 import { v4 as uuid } from "uuid";
 import Task from "./components/Task";
 
 export default function Home() {
   const [tasks, setTask] = useState([]);
   const inputRef = useRef(null);
+
+  useEffect(() => {
+    const storage = localStorage.getItem("tasks");
+    setTask(JSON.parse(storage || []));
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   const addTask = (event) => {
     event.preventDefault();
